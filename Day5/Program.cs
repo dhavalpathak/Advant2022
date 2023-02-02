@@ -82,7 +82,9 @@ namespace Day5
                 {
                     Console.Write(item.Value.Pop());
                 }
+                
                 Console.WriteLine();
+
                 foreach (KeyValuePair<int, Stack<string>> item in dictCerts2.AsEnumerable())
                 {
                     Console.Write(item.Value.Pop());
@@ -95,19 +97,3 @@ namespace Day5
         }
     }
 }
-
-/*
- * foreach (KeyValuePair<int, Stack<string>> item in dictCerts.AsEnumerable())
-                {
-                    Console.WriteLine(item.Key);
-                    foreach (string str in item.Value)
-                    {
-                        Console.WriteLine(str);
-                    }
-
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.WriteLine();
-                }
-
-*/

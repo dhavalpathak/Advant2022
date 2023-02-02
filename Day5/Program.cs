@@ -12,6 +12,8 @@ namespace Day5
             Stack<string> caretsInput = new Stack<string>();
             Queue<string> caretsInstruction = new Queue<string>();
             Dictionary<int, Stack<string>> dictCerts = new Dictionary<int, Stack<string>>();
+            Dictionary<int, Stack<string>> dictCerts2 = new Dictionary<int, Stack<string>>();
+
             try
             {
                 while ((data = streamReader.ReadLine()) != null)
@@ -34,6 +36,7 @@ namespace Day5
                 foreach (String str in containers)
                 {
                     dictCerts.Add(Convert.ToInt32(str), new Stack<string>());
+                    dictCerts2.Add(Convert.ToInt32(str), new Stack<string>());
                 }
 
                 // assign carets to values
@@ -46,6 +49,7 @@ namespace Day5
                         if (tmpStr.Substring(i, 4).Trim().Length > 0)
                         {
                             dictCerts[p].Push(tmpStr.Substring(i + 1, 1));
+                            dictCerts2[p].Push(tmpStr.Substring(i + 1, 1));
                         }
                         p++;
                     }
@@ -59,14 +63,27 @@ namespace Day5
                     int no = Convert.ToInt32(part[1]);
                     int from = Convert.ToInt32(part[3]);
                     int to = Convert.ToInt32(part[5]);
+                    Stack<string> secondChallenge = new Stack<string>();
 
                     for (int i = 0; i < no; i++)
                     {
                         dictCerts[to].Push(dictCerts[from].Pop());
+
+                        secondChallenge.Push(dictCerts2[from].Pop());
                     }
+                    foreach(string val in secondChallenge)
+                    {
+                        dictCerts2[to].Push(val);
+                    }
+                        
                 }
 
                 foreach (KeyValuePair<int, Stack<string>> item in dictCerts.AsEnumerable())
+                {
+                    Console.Write(item.Value.Pop());
+                }
+                Console.WriteLine();
+                foreach (KeyValuePair<int, Stack<string>> item in dictCerts2.AsEnumerable())
                 {
                     Console.Write(item.Value.Pop());
                 }
